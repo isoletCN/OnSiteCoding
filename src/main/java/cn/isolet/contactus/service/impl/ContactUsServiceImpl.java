@@ -19,10 +19,12 @@ public class ContactUsServiceImpl implements ContactUsService {
 
     @Override
     public void submit(ContactUsFormDTO form) {
-        if(repo.existsByEmail(form.getEmail())){
+        if (repo.existsByEmail(form.getEmail())) {
             throw new CustomException("邮箱信息已经存在，请勿重复提交");
         }
         ContactUsForm entity = mapper.mapToEntity(form);
         repo.save(entity);
+
+        //TODO: send email
     }
 }
